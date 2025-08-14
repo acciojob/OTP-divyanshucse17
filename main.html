@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>OTP Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #verification_heading {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    #verification_subtext {
+      color: gray;
+      margin-bottom: 20px;
+    }
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .code {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+  <h1 id="verification_heading">Verify Your Account</h1>
+  <p id="verification_subtext">Please enter the 6-digit code sent to your email or phone.</p>
+
+  <div class="code-container">
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+  </div>
+
+  <script>
+    const codes = document.querySelectorAll('.code');
+
+    codes[0].focus(); // Focus first box initially
+
+    codes.forEach((code, idx) => {
+      code.addEventListener('input', (e) => {
+        const value = e.target.value;
+        if (value && idx < codes.length - 1) {
+          codes[idx + 1].focus();
+        }
+      });
+
+      code.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+          if (e.target.value === '' && idx > 0) {
+            codes[idx - 1].focus();
+            codes[idx - 1].value = ''; // Clear previous box
+          }
+        }
+      });
+    });
+  </script>
 
 </body>
-
 </html>
